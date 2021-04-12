@@ -1,22 +1,23 @@
 const router = require("express").Router();
 const {
     addThought,
+    getThoughtById,
+    getAllThoughts,
     removeThought,
-    getOneUser,
-    deleteUser,
+    updateThought,
     addReaction,
     removeReaction
-} = require("../../controllers/thought-controller");
+} = require("C:/Users/jader/bricolage/controllers/thought-controllers.js");
 
 router.route("/")
     .post(addThought)
-    .delete(removeThought)
+    .get(getAllThoughts)
 
 
 router.route("/:id")
-    .get(getOneUser)
-    .put(updateUser)
-    .delete(deleteUser);
+    .get(getThoughtById)
+    .put(updateThought)
+    .delete(removeThought);
 
 router.route("/:thoughtId/reactions")
     .delete(removeReaction)

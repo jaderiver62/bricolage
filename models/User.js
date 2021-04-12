@@ -19,11 +19,6 @@ const UserSchema = new Schema({
         ],
         unique: "This e-mail has already been used, please enter a different e-mail to continue"
     },
-    createdBy: {
-        type: String,
-        required: true,
-        trim: true
-    },
     friends: [{
         type: Schema.Types.ObjectId,
         ref: "User"
@@ -40,7 +35,7 @@ const UserSchema = new Schema({
     id: false
 });
 
-PizzaSchema.virtual('friendCount').get(function() {
+UserSchema.virtual('friendCount').get(function() {
     return this.friends.length;
 });
 

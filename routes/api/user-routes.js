@@ -1,17 +1,25 @@
 const router = require("express").Router();
-const userController = require("../../controllers/user-controller");
+const {
+    getAllUsers,
+    createUser,
+    getUserById,
+    updateUser,
+    deleteUser,
+    removeFriend,
+    addFriend,
+} = require("C:/Users/jader/bricolage/controllers/user-controllers.js");
 
 router.route("/")
-    .get(userController.getAllUsers)
-    .post(userController.createUser);
+    .get(getAllUsers)
+    .post(createUser);
 
 router.route("/:id")
-    .get(userController.getUserById)
-    .put(userController.updateUser)
-    .delete(userController.deleteUser);
+    .get(getUserById)
+    .put(updateUser)
+    .delete(deleteUser);
 
 router.route("/:userId/friends/:friendId")
-    .post(userController.addFriend)
-    .delete(userController.removeFriend);
+    .post(addFriend)
+    .delete(removeFriend);
 
 module.exports = router;
