@@ -53,7 +53,8 @@ const userController = {
         User.findOneAndUpdate({
                 _id: params.id
             }, body, {
-                new: true
+                new: true,
+                runValidators: true
             })
             .then(userData => {
                 if (!userData) {
@@ -75,7 +76,62 @@ const userController = {
             })
             .then(userData => res.json(userData))
             .catch(err => res.json(err));
+    },
+    addFriend({
+        params
+    }, res) {
+        User.findOneAndUpdate({
+                _id: params.userId
+            }, {
+                $addToSet: {
+                    friends: params.friendId
+                }
+            }, {
+                new: true,
+                runValidators: true
+            })
+            .then(userData => {
+                if (!userData) {
+                    return res.status(404).json({
+                        message: "No user found with this ID found"
+                    });
+                }
+                res.json(userData);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+    },
+
+    removeFriend({
+        params
+    }, res) {
+        User.findOneAndUpdate({
+                _id: params.userId
+            }, {
+                $pull: {
+                    friends: params.friendId
+                }
+            }, {
+                new: true,
+                runValidators: true
+            })
+            .then(userData => {
+                if (!userData) {
+                    return res.status(404).json({
+                        message: "No user with this ID is found"
+                    });
+                }
+                res.json(userData);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
     }
 };
+
+
 
 module.exports = userController;

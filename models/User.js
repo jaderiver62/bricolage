@@ -1,42 +1,47 @@
-const { Schema, model } = require('mongoose');
+const {
+    Schema,
+    model
+} = require('mongoose');
 
-const UserSchema = new Schema(
-  {
+const UserSchema = new Schema({
     username: {
-      type: String,
-      unique: true,
-      required: true,
-      trim: true
+        type: String,
+        unique: "That username already exists, please try a different one.",
+        required: "You must enter a username to continue",
+        trim: true
     },
-    email: { 
+    email: {
         type: String,
         required: true,
-        match: /.+\@.+\..+/,
-        unique: true},
-    createdBy: {
-      type: String,
-      required: true,
-      trim: true
+        match: [
+            /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+            "You must use a valid e-mail address to continue"
+        ],
+        unique: "This e-mail has already been used, please enter a different e-mail to continue"
     },
-    friends: [],
-    thoughts: [
-      {
+    createdBy: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    friends: [{
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }],
+    thoughts: [{
         type: Schema.Types.ObjectId,
         ref: 'Thought'
-      }
-    ]
-  },
-  {
+    }]
+}, {
     toJSON: {
-      virtuals: true,
-      getters: true
+        virtuals: true,
+        getters: true
     },
     id: false
-  }
-);
+});
 
 PizzaSchema.virtual('friendCount').get(function() {
-  return this.friends.length;
+    return this.friends.length;
 });
 
 const User = model('User', UserSchema);
