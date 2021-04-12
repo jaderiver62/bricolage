@@ -16,7 +16,9 @@ const userController = {
             .then(userData => res.json(userData))
             .catch(err => {
                 console.log(err);
-                res.sendStatus(400);
+                res.status(500).json({
+                    message: "No users are in the database"
+                });
             });
     },
 
@@ -29,12 +31,20 @@ const userController = {
             .populate({
                 path: 'thoughts',
                 select: '-__v'
+            }, {
+                path: "friends",
+                select: "-__v -friends",
+                options: {
+                    lean: true
+                }
             })
             .select('-__v')
             .then(userData => res.json(userData))
             .catch(err => {
                 console.log(err);
-                res.sendStatus(400);
+                res.status(404).json({
+                    message: "This ID isn't in our database"
+                });
             });
     },
 
@@ -43,7 +53,10 @@ const userController = {
     }, res) {
         User.create(body)
             .then(userData => res.json(userData))
-            .catch(err => res.json(err));
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
     },
 
     updateUser({
@@ -59,23 +72,40 @@ const userController = {
             .then(userData => {
                 if (!userData) {
                     res.status(404).json({
-                        message: 'No user was found with that id'
+                        message: "This ID isn't in our database"
                     });
                     return;
                 }
                 res.json(userData);
             })
-            .catch(err => res.json(err));
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    message: "This ID isn't in our database"
+                });
+            });
     },
 
     deleteUser({
         params
     }, res) {
+
         User.findOneAndDelete({
                 _id: params.id
+            }, function(err, docs) {
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log("Deleted: ", docs);
+                }
             })
             .then(userData => res.json(userData))
-            .catch(err => res.json(err));
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    message: "This ID isn't in our database"
+                });
+            });
     },
     addFriend({
         params
@@ -93,7 +123,7 @@ const userController = {
             .then(userData => {
                 if (!userData) {
                     return res.status(404).json({
-                        message: "No user found with this ID found"
+                        message: "This ID isn't in our database"
                     });
                 }
                 res.json(userData);
@@ -120,7 +150,7 @@ const userController = {
             .then(userData => {
                 if (!userData) {
                     return res.status(404).json({
-                        message: "No user with this ID is found"
+                        message: "This ID isn't in our database"
                     });
                 }
                 res.json(userData);
