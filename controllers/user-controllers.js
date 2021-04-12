@@ -1,4 +1,6 @@
-const { User } = require('../models');
+const {
+    User
+} = require('../models');
 
 const userController = {
     getAllUsers(req, res) {
@@ -8,7 +10,9 @@ const userController = {
                 select: '-__v'
             })
             .select('-__v')
-            .sort({ _id: -1 })
+            .sort({
+                _id: -1
+            })
             .then(userData => res.json(userData))
             .catch(err => {
                 console.log(err);
@@ -16,8 +20,12 @@ const userController = {
             });
     },
 
-    getUserById({ params }, res) {
-        User.findOne({ _id: params.id })
+    getUserById({
+        params
+    }, res) {
+        User.findOne({
+                _id: params.id
+            })
             .populate({
                 path: 'thoughts',
                 select: '-__v'
@@ -30,17 +38,28 @@ const userController = {
             });
     },
 
-    createUser({ body }, res) {
+    createUser({
+        body
+    }, res) {
         User.create(body)
             .then(userData => res.json(userData))
             .catch(err => res.json(err));
     },
 
-    updateUser({ params, body }, res) {
-        User.findOneAndUpdate({ _id: params.id }, body, { new: true })
+    updateUser({
+        params,
+        body
+    }, res) {
+        User.findOneAndUpdate({
+                _id: params.id
+            }, body, {
+                new: true
+            })
             .then(userData => {
                 if (!userData) {
-                    res.status(404).json({ message: 'No user was found with that id' });
+                    res.status(404).json({
+                        message: 'No user was found with that id'
+                    });
                     return;
                 }
                 res.json(userData);
@@ -48,8 +67,12 @@ const userController = {
             .catch(err => res.json(err));
     },
 
-    deleteUser({ params }, res) {
-        User.findOneAndDelete({ _id: params.id })
+    deleteUser({
+        params
+    }, res) {
+        User.findOneAndDelete({
+                _id: params.id
+            })
             .then(userData => res.json(userData))
             .catch(err => res.json(err));
     }
