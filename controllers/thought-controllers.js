@@ -2,7 +2,7 @@
 
 const {
     User,
-    Thought
+    Thought,
 } = require('../models');
 
 const thoughtController = {
@@ -63,7 +63,7 @@ const thoughtController = {
                 if (!userData) {
                     return res.status(404).json();
                 }
-                res.json(body);
+                res.json(userData);
             })
             .catch(err => {
                 console.log(err);
@@ -137,26 +137,25 @@ const thoughtController = {
             .then(thoughtData => {
                 if (!thoughtData) {
                     return res.status(404).json({
-                        message: "No thought found with this id."
+                        message: "No thought found with this id"
                     });
                 }
-                res.json(thoughtData);
-            });
-        User.findOneAndUpdate({
-                username: params.username
-            }, {
-                $pull: {
-                    thoughts: params.thoughtId
-                }
-            }, {
-                new: true,
-                runValidators: true
+                return User.findOneAndUpdate({
+                    username: thoughtData.username
+                }, {
+                    $pull: {
+                        thoughts: params.id
+                    }
+                }, {
+                    new: true,
+                })
             })
             .then(thoughtData => {
                 if (!thoughtData) {
-                    return res.status(404).json({
-                        message: "This username isn't in our database"
-                    });
+                    res.status(404).json({
+                        message: "No user found with this username"
+      });
+                    return;
                 }
                 res.json(thoughtData);
             })
@@ -173,7 +172,9 @@ const thoughtController = {
                 _id: params.thoughtId
             }, {
                 $pull: {
-                    reactions: params.reactionId
+                    reactions: {
+                        reactionId: params.reactionId
+                    }
                 }
             }, {
                 new: true,
@@ -182,7 +183,7 @@ const thoughtController = {
             .then(thoughtData => {
                 if (!thoughtData) {
                     return res.status(404).json({
-                        message: "This ID isn't in our database"
+                        message: "This ID is not in the database"
                     });
                 }
                 res.json(thoughtData);
@@ -193,6 +194,7 @@ const thoughtController = {
             });
     }
 };
+
 
 // Export the thoughtController
 module.exports = thoughtController;
