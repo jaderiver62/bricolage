@@ -1,17 +1,17 @@
 const router = require("express").Router();
 const {
     getAllUsers,
-    createUser,
+    addUser,
     getUserById,
     updateUser,
     deleteUser,
     removeFriend,
     addFriend,
-} = require("C:/Users/jader/bricolage/controllers/user-controllers.js");
+} = require("../../controllers/user-controllers.js");
 
 router.route("/")
     .get(getAllUsers)
-    .post(createUser);
+    .post(addUser);
 
 router.route("/:id")
     .get(getUserById)
