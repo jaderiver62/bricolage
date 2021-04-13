@@ -31,7 +31,9 @@ To use Bricolage you must have Node.js and MongoDB installed first.  Next, clone
 
 To use Bricolage, run `npm start`, then navigate to localhost:3001/{route}.  Please see the video link below for a demonstration.
 
-[Project Video Link](video link)
+*Note:* The "Update Thought" demo demonstrates that the username does not change when a thought is updated!
+
+[Project Video Link](https://drive.google.com/file/d/1jqrbbqO9FWM3kXq6xlnCAqQUtmvixwDD/view)
 
 ---------------------------------------
 
