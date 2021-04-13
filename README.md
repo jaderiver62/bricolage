@@ -5,6 +5,12 @@
 
 ## Description
 
+`Bricolage:
+*noun*
+* a construction or creation from a diverse range of available things.`
+
+
+
 This projects utilizes a MongoDB NoSQL database to build the back-end of an API.
 
 This RESTful API is ideal for building a social networking application.  It performs CRUD operations on the database to enable Users to post Thoughts, post Reactions to Thoughts and to build a list of Friends for each User.
