@@ -1,1 +1,66 @@
-# bricolage
+# Bricolage
+<a href='https://opensource.org/licenses/MIT'><img src='https://img.shields.io/badge/license-MIT-blueviolet' alt='license badge'></a>
+
+---------------------------------------
+
+## Description
+
+This projects utilizes a MongoDB NoSQL database to build the back-end of an API.
+
+This RESTful API is ideal for building a social networking application.  It performs CRUD operations on the database to enable Users to post Thoughts, post Reactions to Thoughts and to build a list of Friends for each User.
+
+When a User is deleted, Bricolage also deletes all of the associated thougts created by the User.  Thoughts and Reactions can also be deleted.  See our [demo video](#usage) for more details.
+
+---------------------------------------
+
+Project Link: 
+[Bricolage](link)
+
+---------------------------------------
+
+
+## Table of Contents
+* [Installation](#installation)
+* [Usage](#usage)
+* [Questions](#questions)
+* [License](#license)
+
+---------------------------------------
+
+## Installation
+To use Bricolage you must have Node.js and MongoDB installed first.  Next, clone this repo and navigate to the bricolage folder.  Finally, run `npm install` and npm will download all of Bricolages dependencies. 
+
+---------------------------------------
+
+## Usage
+
+![Project Usage Image](video link)
+
+---------------------------------------
+
+Written using:
+                    
+* JavaScript
+   
+* CSS
+   
+* ES6
+   
+* Node
+  
+---------------------------------------
+
+## Questions
+
+For any input, concerns, bugs or questions please get in touch!  Simply reach out to [nina Cummings](https://github.com/jaderiver62/) via GitHub or via e-mail: jaderiver64@gmail.com.
+
+---------------------------------------
+
+## Licence
+
+
+#### This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+#### &copy; 2021 Nina Cummings
+
+---------------------------------------
+    
