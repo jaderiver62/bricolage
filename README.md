@@ -52,7 +52,7 @@ To use Bricolage, run `npm start`, then in an application such as [Insomnia](htt
 
 ## Testing
 
-You must have Insomnia or something similar to test Bricolage.
+You must have [Insomnia](https://insomnia.rest/) or something similar to test Bricolage.
 
 See the video above for a demonstration in Bricolage on Insomnia!
 
