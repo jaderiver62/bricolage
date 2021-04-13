@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-//  Using 'useCreateIndex' to supress deprecation warnings, since we are defining indexes
+//  Using 'useCreateIndex' to supress deprecation warnings
 mongoose.set('useCreateIndex', true);
 
 const app = express();

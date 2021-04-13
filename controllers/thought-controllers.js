@@ -47,31 +47,28 @@ const thoughtController = {
     }, res) {
         console.log(body);
         Thought.create(body)
-            .then(({
-                _id
-            }) => {
+            .then(thoughtData => {
                 return User.findOneAndUpdate({
                     username: body.username
                 }, {
-                    $addToSet: {
-                        thoughts: _id
+                    $push: {
+                        thoughts: thoughtData._id
                     }
                 }, {
-                    new: true
-                });
+                    new: true,
+                    runValidators: true
+                })
             })
-            .then(thoughtData => {
-                if (!thoughtData) {
-                    return res.status(404).json({
-                        message: "This ID isn't in our database"
-                    });
+            .then(userData => {
+                if (!userData) {
+                    return res.status(404).json();
                 }
-                res.json(thoughtData);
+                res.json(body);
             })
             .catch(err => {
                 console.log(err);
                 res.status(500).json(err);
-            })
+            });
     },
     //  Create a new reaction and add it to the reaction's array in the associated thought
     //  Expects: {"reactionBody": "Fascinating quip... ","username": "someUser"}
@@ -149,12 +146,12 @@ const thoughtController = {
                 res.status(500).json(err);
             });
     },
-    //  Delete a reaction by it'd ID
+    //  Delete a reaction by it's ID
     removeReaction({
         params
     }, res) {
-        Reaction.findOneAndUpdate({
-                _id: params.reactionId
+        Thought.findOneAndUpdate({
+                _id: params.thoughtId
             }, {
                 $pull: {
                     reactions: {
@@ -162,14 +159,10 @@ const thoughtController = {
                     }
                 }
             }, {
-                new: true,
-                runValidators: true
+                new: true
             })
-            .then(reactionData => res.json(reactionData))
-            .catch(err => {
-                console.log(err);
-                res.status(500).json(err);
-            });
+            .then(thoughtData => res.json(thoughtData))
+            .catch(err => res.json(err));
     }
 };
 
