@@ -186,7 +186,9 @@ const thoughtController = {
                         message: "This ID is not in the database"
                     });
                 }
-                res.json(thoughtData);
+                res.json({
+                    message: "Reaction was Deleted"
+                });
             })
             .catch(err => {
                 console.log(err);
