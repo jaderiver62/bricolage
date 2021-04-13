@@ -23,7 +23,7 @@ const ReactionSchema = new Schema({
         type: Date,
         default: Date.now,
         get: date => {
-            return ` ${moment(date).format("llll").toString()}`;
+            return `${moment(date).format("llll").toString()}`;
         }
 
     }
@@ -44,7 +44,7 @@ const ThoughtSchema = new Schema({
         type: Date,
         default: Date.now,
         get: date => {
-            return ` ${moment(date).format("llll").toString()}`;
+            return `${moment(date).format("llll").toString()}`;
         }
     },
     username: {
