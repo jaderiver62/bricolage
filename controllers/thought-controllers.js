@@ -127,6 +127,7 @@ const thoughtController = {
             });
     },
     //  Delete a thought using the ID
+    //  Remove from the User's thought array
     removeThought({
         params
     }, res) {
@@ -153,7 +154,7 @@ const thoughtController = {
                 if (!thoughtData) {
                     res.status(404).json({
                         message: "No user found with this username"
-                    });
+      });
                     return;
                 }
                 res.json(thoughtData);
