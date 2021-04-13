@@ -22,6 +22,7 @@ Project Link:
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
+* [Testing](#testing)
 * [Questions](#questions)
 * [License](#license)
 
@@ -39,6 +40,15 @@ To use Bricolage, run `npm start`, then navigate to localhost:3001/{route}.  Ple
 [Project Video Link](video link)
 
 ---------------------------------------
+
+## Testing
+
+You must have Insomnia or something similar to test Bricolage.
+
+See video above for a deomstration in Bricolage on Insomnia!
+
+---------------------------------------
+
 
 Written using:
                     
