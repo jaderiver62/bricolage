@@ -12,7 +12,7 @@ const UserSchema = new Schema({
     },
     email: {
         type: String,
-        required: true,
+        required: "Entering an e-mail is required to continue",
         match: [
             /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
             "You must use a valid e-mail address to continue"

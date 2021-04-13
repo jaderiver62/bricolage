@@ -7,10 +7,7 @@ const thoughtController = {
 
     getAllThoughts(req, res) {
         Thought.find({})
-            .populate({
-                path: "reactions",
-                select: "-__v"
-            })
+            .select("-__v")
             .then(thoughtData => {
                 res.json(thoughtData);
             })
@@ -26,7 +23,7 @@ const thoughtController = {
         Thought.findOne({
                 _id: params.id
             })
-            .select('-__v')
+            .select("-__v")
             .then(thoughtData => {
                 if (!thoughtData) {
                     return res.status(404).json({
@@ -46,18 +43,18 @@ const thoughtController = {
     }, res) {
         console.log(body);
         Thought.create(body)
-            .then(thoughtData => res.json(thoughtData))
-            .then(thoughtData => {
+            .then(({
+                _id
+            }) => {
                 return User.findOneAndUpdate({
                     username: body.username
                 }, {
                     $push: {
-                        thoughts: thoughtData._id
+                        thoughts: _id
                     }
                 }, {
-                    new: true,
-                    runValidators: true
-                })
+                    new: true
+                });
             })
             .then(thoughtData => {
                 if (!thoughtData) {
@@ -76,8 +73,8 @@ const thoughtController = {
         params,
         body
     }, res) {
-        Reaction.findOneAndUpdate({
-                _id: params.reactionId
+        Thought.findOneAndUpdate({
+                _id: params.thoughtId
             }, {
                 $addToSet: {
                     reactions: body
@@ -88,10 +85,9 @@ const thoughtController = {
             })
             .then(thoughtData => {
                 if (!thoughtData) {
-                    res.status(404).json({
-                        message: "This ID isn't in our database"
+                    return res.status(404).json({
+                        message: "This ID is the in our database"
                     });
-                    return;
                 }
                 res.json(thoughtData);
             })
@@ -136,7 +132,7 @@ const thoughtController = {
             .then(thoughtData => {
                 if (!thoughtData) {
                     return res.status(404).json({
-                        message: "This ID is not in our database"
+                        message: "That ID is not in our database"
                     });
                 }
                 res.json(thoughtData);
@@ -150,7 +146,7 @@ const thoughtController = {
     removeReaction({
         params
     }, res) {
-        Thought.findOneAndUpdate({
+        Reaction.findOneAndUpdate({
                 _id: params.reactionId
             }, {
                 $pull: {
@@ -162,7 +158,7 @@ const thoughtController = {
                 new: true,
                 runValidators: true
             })
-            .then(thoughtData => res.json(thoughtData))
+            .then(reactionData => res.json(reactionData))
             .catch(err => {
                 console.log(err);
                 res.status(500).json(err);
