@@ -136,7 +136,25 @@ const thoughtController = {
             .then(thoughtData => {
                 if (!thoughtData) {
                     return res.status(404).json({
-                        message: "That ID is not in our database"
+                        message: "No thought found with this id."
+                    });
+                }
+                res.json(thoughtData);
+            });
+        User.findOneAndUpdate({
+                username: params.username
+            }, {
+                $pull: {
+                    thoughts: params.thoughtId
+                }
+            }, {
+                new: true,
+                runValidators: true
+            })
+            .then(thoughtData => {
+                if (!thoughtData) {
+                    return res.status(404).json({
+                        message: "This username isn't in our database"
                     });
                 }
                 res.json(thoughtData);
