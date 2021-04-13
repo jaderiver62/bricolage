@@ -154,15 +154,24 @@ const thoughtController = {
                 _id: params.thoughtId
             }, {
                 $pull: {
-                    reactions: {
-                        reactionId: params.reactionId
-                    }
+                    reactions: params.reactionId
                 }
             }, {
-                new: true
+                new: true,
+                runValidators: true
             })
-            .then(thoughtData => res.json(thoughtData))
-            .catch(err => res.json(err));
+            .then(thoughtData => {
+                if (!thoughtData) {
+                    return res.status(404).json({
+                        message: "This ID isn't in our database"
+                    });
+                }
+                res.json(thoughtData);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
     }
 };
 
