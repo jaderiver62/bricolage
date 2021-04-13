@@ -5,11 +5,11 @@
 
 ## Description
 
-`
-Bricolage:
-*noun*
-* a construction or creation from a diverse range of available things.`
-
+>
+>Bricolage:
+>*noun*
+>* a construction or creation from a diverse range of available things.`
+>
 
 
 This projects utilizes a MongoDB NoSQL database to build the back-end of an API.
