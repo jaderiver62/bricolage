@@ -13,12 +13,6 @@ When a User is deleted, Bricolage also deletes all of the associated thougts cre
 
 ---------------------------------------
 
-Project Link: 
-[Bricolage](link)
-
----------------------------------------
-
-
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
