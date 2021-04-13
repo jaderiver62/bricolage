@@ -5,7 +5,8 @@
 
 ## Description
 
-`Bricolage:
+`
+Bricolage:
 *noun*
 * a construction or creation from a diverse range of available things.`
 
