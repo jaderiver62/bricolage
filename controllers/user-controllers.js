@@ -99,24 +99,11 @@ const userController = {
             });
     },
     //  Adds a friend's ID to a user's friends array
-    addFriend({
-        params
-    }, res) {
-        User.findOneAndUpdate({
-                _id: params.userId
-            }, {
-                $addToSet: {
-                    friends: params.friendId
-                }
-            }, {
-                new: true,
-                runValidators: true
-            })
+    addFriend({ params }, res) {
+        User.findOneAndUpdate({ _id: params.userId }, { $addToSet: { friends: params.friendId } }, { new: true, runValidators: true })
             .then(userData => {
                 if (!userData) {
-                    return res.status(404).json({
-                        message: "This ID isn't in our database"
-                    });
+                    return res.status(404).json({ message: "This ID is not in the database" });
                 }
                 res.json(userData);
             })
