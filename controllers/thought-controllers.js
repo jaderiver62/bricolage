@@ -2,7 +2,7 @@
 
 const {
     User,
-    Thought
+    Thought,
 } = require('../models');
 
 const thoughtController = {
@@ -131,10 +131,14 @@ const thoughtController = {
         params
     }, res) {
 
-        Thought.findOneAndDelete({ _id: params.id })
+        Thought.findOneAndDelete({
+                _id: params.id
+            })
             .then(thoughtData => {
                 if (!thoughtData) {
-                    return res.status(404).json({ message: "No thought found with this id." });
+                    return res.status(404).json({
+                        message: "No thought found with this id."
+                    });
                 }
                 res.json(thoughtData);
             })
@@ -147,21 +151,10 @@ const thoughtController = {
     removeReaction({
         params
     }, res) {
-        Thought.findOneAndUpdate({
-                _id: params.thoughtId
-            }, {
-                $pull: {
-                    reactions: params.reactionId
-                }
-            }, {
-                new: true,
-                runValidators: true
-            })
+        Thought.findOneAndUpdate({ _id: params.thoughtId }, { $pull: { reactions: { reactionId: params.reactionId } } }, { new: true, runValidators: true })
             .then(thoughtData => {
                 if (!thoughtData) {
-                    return res.status(404).json({
-                        message: "This ID isn't in our database"
-                    });
+                    return res.status(404).json({ message: "No thought found with this id." });
                 }
                 res.json(thoughtData);
             })
