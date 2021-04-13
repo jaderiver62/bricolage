@@ -59,7 +59,7 @@ Written using:
 
 ## Questions
 
-For any input, concerns, bugs or questions please get in touch!  Simply reach out to [nina Cummings](https://github.com/jaderiver62/) via GitHub or via e-mail: jaderiver64@gmail.com.
+For any input, concerns, bugs or questions please get in touch!  Simply reach out to [Nina Cummings](https://github.com/jaderiver62/) via GitHub or via e-mail: jaderiver64@gmail.com.
 
 ---------------------------------------
 
