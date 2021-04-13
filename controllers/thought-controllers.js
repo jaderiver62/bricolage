@@ -63,7 +63,7 @@ const thoughtController = {
                 if (!userData) {
                     return res.status(404).json();
                 }
-                res.json(body);
+                res.json(userData);
             })
             .catch(err => {
                 console.log(err);
@@ -130,15 +130,31 @@ const thoughtController = {
     removeThought({
         params
     }, res) {
-
         Thought.findOneAndDelete({
                 _id: params.id
             })
             .then(thoughtData => {
                 if (!thoughtData) {
                     return res.status(404).json({
-                        message: "No thought found with this id."
+                        message: "No thought found with this id"
                     });
+                }
+                return User.findOneAndUpdate({
+                    username: thoughtData.username
+                }, {
+                    $pull: {
+                        thoughts: params.id
+                    }
+                }, {
+                    new: true,
+                })
+            })
+            .then(thoughtData => {
+                if (!thoughtData) {
+                    res.status(404).json({
+                        message: "No user found with this username"
+                    });
+                    return;
                 }
                 res.json(thoughtData);
             })
@@ -151,10 +167,23 @@ const thoughtController = {
     removeReaction({
         params
     }, res) {
-        Thought.findOneAndUpdate({ _id: params.thoughtId }, { $pull: { reactions: { reactionId: params.reactionId } } }, { new: true, runValidators: true })
+        Thought.findOneAndUpdate({
+                _id: params.thoughtId
+            }, {
+                $pull: {
+                    reactions: {
+                        reactionId: params.reactionId
+                    }
+                }
+            }, {
+                new: true,
+                runValidators: true
+            })
             .then(thoughtData => {
                 if (!thoughtData) {
-                    return res.status(404).json({ message: "No thought found with this id." });
+                    return res.status(404).json({
+                        message: "This ID is not in the database"
+                    });
                 }
                 res.json(thoughtData);
             })
@@ -164,6 +193,7 @@ const thoughtController = {
             });
     }
 };
+
 
 // Export the thoughtController
 module.exports = thoughtController;
