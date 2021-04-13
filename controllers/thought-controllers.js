@@ -127,6 +127,7 @@ const thoughtController = {
             });
     },
     //  Delete a thought using the ID
+    //  Remove from the User's thought array
     removeThought({
         params
     }, res) {
