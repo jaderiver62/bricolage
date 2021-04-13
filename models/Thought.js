@@ -3,8 +3,10 @@ const {
     model,
     Types
 } = require('mongoose');
+//  Using moment to format the date/time text
 var moment = require('moment');
 
+//  Schema for the Reaction model
 const ReactionSchema = new Schema({
     reactionId: {
         type: Schema.Types.ObjectId,
@@ -33,6 +35,7 @@ const ReactionSchema = new Schema({
     }
 });
 
+// Schema for the Thought model
 const ThoughtSchema = new Schema({
     thoughtText: {
         type: String,

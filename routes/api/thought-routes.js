@@ -1,4 +1,5 @@
 const router = require("express").Router();
+//  require
 const {
     addThought,
     getThoughtById,
@@ -7,7 +8,7 @@ const {
     updateThought,
     addReaction,
     removeReaction
-} = require("C:/Users/jader/bricolage/controllers/thought-controllers.js");
+} = require("../../controllers/thought-controllers.js");
 
 router.route("/")
     .post(addThought)
