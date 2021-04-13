@@ -1,9 +1,12 @@
+//  The user-controller provides methods to be used by the API routes for the User Model - user-routes.js
+
 const {
     User,
     Thought
 } = require('../models');
 
 const userController = {
+    //  Get all users
     getAllUsers(req, res) {
         User.find({})
             .select('-__v')
@@ -15,22 +18,12 @@ const userController = {
                 });
             });
     },
-
+    // Get one user by ID as the parameter
     getUserById({
         params
     }, res) {
         User.findOne({
                 _id: params.id
-            })
-            .populate({
-                path: 'thoughts',
-                select: '-__v'
-            }, {
-                path: "friends",
-                select: "-__v -friends",
-                options: {
-                    lean: true
-                }
             })
             .select('-__v')
             .then(userData => res.json(userData))
@@ -99,7 +92,7 @@ const userController = {
                     .then(result => console.log(`Deleted ${result.deletedCount} item(s).`))
                     .catch(err => console.error(`Delete failed with error: ${err}`));
 
-                res.json(userData);
+                res.json("User and all associated thoughts have been deleted.");
             })
             .catch(err => {
                 console.log(err);
