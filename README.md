@@ -39,7 +39,7 @@ To use Bricolage, run `npm start`, then navigate to localhost:3001/{route}.  Ple
 
 You must have Insomnia or something similar to test Bricolage.
 
-See video above for a deomstration in Bricolage on Insomnia!
+See the video above for a demonstration in Bricolage on Insomnia!
 
 ---------------------------------------
 
