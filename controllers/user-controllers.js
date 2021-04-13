@@ -1,4 +1,4 @@
-//  The user-controller provides methods to be used by the API routes for the User Model - user-routes.js
+//  The userController provides methods to be used by the API routes for the User Model - user-routes.js
 
 const {
     User,
@@ -18,7 +18,7 @@ const userController = {
                 });
             });
     },
-    // Get one user by ID as the parameter
+    //  Get one user by ID as the parameter
     getUserById({
         params
     }, res) {
@@ -34,8 +34,9 @@ const userController = {
                 });
             });
     },
-
-    createUser({
+    //  Creates a new unique user
+    //  Expects: {"username": "jackHandey",	"email" : "jackHandey@mail.ccsf.edu"}
+    addUser({
         body
     }, res) {
         User.create(body)
@@ -45,7 +46,8 @@ const userController = {
                 res.status(500).json(err);
             });
     },
-
+    //  Alter an existing user's data
+    //  Expects: {"username": "jack",	"email" : "jackHandey@mail.ccsf.edu"}
     updateUser({
         params,
         body
@@ -67,16 +69,14 @@ const userController = {
             })
             .catch(err => {
                 console.log(err);
-                res.status(500).json({
-                    message: "This ID isn't in our database"
-                });
+                res.status(500).json();
             });
     },
-
+    //  Deletes a user and all of their associated thoughts - using the username and the deleteMany method
+    //  Locates user by parameter ID
     deleteUser({
         params
     }, res) {
-
         User.findOneAndDelete({
                 _id: params.id
             })
@@ -91,7 +91,6 @@ const userController = {
                     })
                     .then(result => console.log(`Deleted ${result.deletedCount} item(s).`))
                     .catch(err => console.error(`Delete failed with error: ${err}`));
-
                 res.json("User and all associated thoughts have been deleted.");
             })
             .catch(err => {
@@ -99,6 +98,7 @@ const userController = {
                 res.status(500).json(err);
             });
     },
+    //  Adds a friend's ID to a user's friends array
     addFriend({
         params
     }, res) {
@@ -125,7 +125,7 @@ const userController = {
                 res.status(500).json(err);
             });
     },
-
+    //  Deletes a friend's ID to a user's friends array
     removeFriend({
         params
     }, res) {
@@ -153,7 +153,5 @@ const userController = {
             });
     }
 };
-
-
-
+//  Export the userController
 module.exports = userController;

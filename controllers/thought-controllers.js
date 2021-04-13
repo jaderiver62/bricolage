@@ -1,4 +1,4 @@
-//  The thought-controller provides methods to be used by the API routes for the Thought Model - thought-routes.js
+//  The thoughtController provides methods to be used by the API routes for the Thought Model - thought-routes.js
 
 const {
     User,
@@ -173,5 +173,5 @@ const thoughtController = {
     }
 };
 
-// Export the controller object
+// Export the thoughtController
 module.exports = thoughtController;
