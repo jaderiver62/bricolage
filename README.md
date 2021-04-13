@@ -18,11 +18,11 @@
 >
 
 
-This projects utilizes a MongoDB NoSQL database to build the back-end of an API.
+This project utilizes a MongoDB NoSQL database to build the back-end of an API.
 
-This RESTful API is ideal for building a social networking application.  It performs CRUD operations on the database to enable Users to post Thoughts, post Reactions to Thoughts and to build a list of Friends for each User.
+The result is a RESTful API that is ideal for building a social networking application.  It performs CRUD operations on the database to enable Users to post Thoughts, post Reactions to Thoughts and to build a list of Friends for each User.
 
-When a User is deleted, Bricolage also deletes all of the associated thougts created by the User.  Thoughts and Reactions can also be deleted.  See our [demo video](#usage) for more details.
+When a User is deleted, Bricolage also deletes all of the associated thougts created by the User.  Thoughts and Reactions can also be deleted.  See our [Usage Guide](#usage) for more details.
 
 ---------------------------------------
 
@@ -42,9 +42,9 @@ To use Bricolage you must have Node.js and MongoDB installed first.  Next, clone
 
 ## Usage
 
-To use Bricolage, run `npm start`, then navigate to localhost:3001/{route}.  Please see the video link below for a demonstration.
+To use Bricolage, run `npm start`, then in an application such as [Insomnia](https://insomnia.rest/) navigate to localhost:3001/{route}.  Please see the video link below for a demonstration.
 
-*Note:* The "Update Thought" demo demonstrates that the username does not change when a thought is updated!
+*Note:* The "Update Thought" demo in this video demonstrates that the username does not change when a thought is updated.
 
 [Project Video Link](https://drive.google.com/file/d/1jqrbbqO9FWM3kXq6xlnCAqQUtmvixwDD/view)
 
