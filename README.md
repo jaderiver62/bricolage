@@ -34,18 +34,15 @@ To use Bricolage you must have Node.js and MongoDB installed first.  Next, clone
 
 ## Usage
 
-![Project Usage Image](video link)
+To use Bricolage, run `npm start`, then navigate to localhost:3001/{route}.  Please see the video link below for a demonstration.
+
+[Project Video Link](video link)
 
 ---------------------------------------
 
 Written using:
                     
 * JavaScript
-   
-* CSS
-   
-* ES6
-   
 * Node
   
 ---------------------------------------
